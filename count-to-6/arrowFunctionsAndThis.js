@@ -4,7 +4,7 @@ var foot = {
         setImmediate(()=>{
             console.log(this.yelp);
         });
-        return this.yelp;
+        //return this.yelp;
     }
 };
 
