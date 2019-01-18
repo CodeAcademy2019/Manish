@@ -13,12 +13,25 @@ const calcProfit = (index,inputList)=>{
             profit = pileOfPurl[j]
         }
     }
+    if(profit<0){
+        return [[],0]
+    }
+    if(profit==0){
+        return [[index],0]
+    }
     return [profitIndex,profit];
 }
 
+const resultFormat = (results)=>{
+    resultString = '';
+    results.forEach((eachPile)=>{
+        
+    })
+}
+
 const calculate = ()=>{
-    const input = "1\n6 12 3 10 7 16 5\n2\n5 7 3 10 9 10\n8 1 2 3 4 10 16 10 4\n0"
-    let result = []
+    const input = '1\n6 12 3 10 7 16 5\n2\n5 7 3 10 9 10\n8 1 2 3 4 10 16 10 4\n0'
+    let results = []
     inputs = input.split("\n")
     let length = parseInt(inputs[0])
     inputs = inputs.slice(1)
@@ -27,11 +40,11 @@ const calculate = ()=>{
         continueLoop = true;
     }
     while(continueLoop){
+        result = [];
         for(let i=0;i<length;i++){
             inputList = inputs[i].split(' ')
-            console.log(inputList)
             const [profitIndex,profit] = calcProfit(parseInt(inputList[0]),inputList.slice(1))
-            console.log([profitIndex,profit])
+            result.push([profitIndex,profit])
         }
         inputs = inputs.slice(length)
         length = parseInt(inputs[0])
@@ -39,8 +52,11 @@ const calculate = ()=>{
         if(length==0){
             continueLoop = false;
         }
+        results.push(result)
     }
-    return inputs
+    return resultFormat(results);
 }
-// console.log(calcProfit(5,['7','3','10','9','10']))
-calculate()
+console.log(calcProfit(5,['10','10','10','10','10']))
+// calculate()
+
+module.exports = {calculate,calcProfit}
