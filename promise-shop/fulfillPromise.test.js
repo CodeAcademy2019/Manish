@@ -2,13 +2,10 @@ var fulfill = require('./fulfillPromise');
 
 jest.useFakeTimers();
 
-describe('Fulfilling Promise',()=>{
-    it('Promise is Resolved',()=>{
+describe('Promise',()=>{
+    it('should Resolve',()=>{
         return expect(fulfill.promise).resolves.toEqual('FULFILLED!')
     })
-    // it('Promise is not Rejected',()=>{
-    //     return expect(fulfill.promise).rejects.not.toEqual(new Error())
-    // })
 })
 describe('setTimeOut',()=>{
     it('setTimeout() should be called once',()=>{
