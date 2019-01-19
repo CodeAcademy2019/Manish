@@ -25,7 +25,6 @@ const sortNumber = (a,b)=>{
     return b-a;
 }
 
-
 const resultFormat = (results)=>{
     resultString = '';
     let i = 0;
@@ -52,6 +51,8 @@ const resultFormat = (results)=>{
         resultString = resultString+maxProfit+'\n'
         const count = plursCount.length>20 ? 20 : plursCount.length
         plursCount = [...plursCount]
+        if(plursCount.length>20)
+            plursCount = plursCount.slice(0,20)
         let plursCountString = plursCount.slice(1).reduce((accumulator,presentValue)=>{
             return accumulator+' '+presentValue
         },'')
@@ -65,7 +66,7 @@ const resultFormat = (results)=>{
 }
 
 const calculate = (input)=>{
-    // const input = '1\n6 12 3 10 7 16 5\n2\n5 7 3 10 9 10\n8 1 2 3 4 10 16 10 4\n0'
+    // const input = ''
     let results = []
     inputs = input.split("\n")
     let length = parseInt(inputs[0])
@@ -92,6 +93,6 @@ const calculate = (input)=>{
     return resultFormat(results);
 }
 
-calculate('3\n3 19 9 2\n5 20 11 10 7 1\n2 18 2\n0')
+calculate('4\n11 3 4 11 9 11 9 11 12 7 14 6\n19 16 17 18 19 1 7 5 3 3 11 12 8 9 13 12 11 11 11 2\n3 13 16 17\n14 3 13 13 21 11 12 9 7 5 4 5 12 13 5\n0')
 
 module.exports = {calculate,calcProfit}

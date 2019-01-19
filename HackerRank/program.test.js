@@ -49,4 +49,11 @@ describe('Public Cases',()=>{
     it('Case 10',()=>{
         expect(pileOfPurls.calculate('2\n5 4 5 6 10 4\n5 9 8 7 4 9\n0')).toEqual('1\n34\n10');
     })
+    it('Case 11',()=>{
+        expect(pileOfPurls.calculate('4\n11 3 4 11 9 11 9 11 12 7 14 6\n19 16 17 18 19 1 7 5 3 3 11 12 8 9 13 12 11 11 11 2\n3 13 16 17\n14 3 13 13 21 11 12 9 7 5 4 5 12 13 5\n0')).toEqual('1\n21\n12 14 16 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34');
+    })
+    it('Case 12',()=>{
+        expect(pileOfPurls.calculate('8\n6 12 8 16 2 7 2\n6 1 3 11 9 11 9\n3 11 15 4\n4 2 3 9 11\n4 14 13 11 1\n2 11 2\n6 12 8 12 8 12 8\n1 8\n0')).toEqual('1\n55\n18 20 21 22 23 24 25 26 27 28 29 31');
+    })
 })
+
