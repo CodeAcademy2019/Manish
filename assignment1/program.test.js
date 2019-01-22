@@ -10,4 +10,7 @@ describe('Bowling Score',()=>{
 	it('Input with a strike',()=>{
 		expect(calculateGameScore(10,3,2,4,5)).toEqual(29);
 	});
+	it('Input with a special 10th Frame',()=>{
+		expect(calculateGameScore(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10)).toEqual(29);
+	});
 });

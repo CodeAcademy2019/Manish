@@ -7,10 +7,32 @@ const calculateGameScore = (...scores)=>{
 };
 
 const formatInputToFrameScores = ((scores)=>{
-	const frameScores = scores.reduce((accumulator,presentValue,presentIndex)=>{
-		if(presentValue===10){
-			accumulator.push([10,10]);
-		}else if(presentIndex===0){
+	const intermediateScore1 = scores.reduce((accumulator,preValue,preIndex,arr)=>{
+		if(accumulator.length%2==0 && preValue==10){
+			let score = 10;
+			if(arr[preIndex+1]!==undefined){
+				score += arr[preIndex+1];
+			}
+			if(arr[preIndex+2]!==undefined){
+				score += arr[preIndex+2];
+			}
+			accumulator.push(score,0);
+		}
+		else{
+			let score = 0;
+			if(accumulator.length%2==0 && preValue+arr[preValue-1]==10){
+				if(arr[preIndex+1]!==undefined){
+					score = preValue+arr[preIndex+1];
+				}
+				accumulator.push(score);
+			}else{
+				accumulator.push(preValue);
+			}
+		}
+		return accumulator;
+	},[]);
+	const frameScores = intermediateScore1.reduce((accumulator,presentValue,presentIndex)=>{
+		if(presentIndex===0){
 			accumulator.push(presentValue);
 		}
 		else{
@@ -20,6 +42,7 @@ const formatInputToFrameScores = ((scores)=>{
 				let presentFrameScore = [previousValue,frameScore];
 				let previousFrameScore = accumulator.pop();
 				if(previousFrameScore!==undefined){
+					// if a frame exists to pop
 					if(previousFrameScore[0]===10){
 						previousFrameScore[1]+=presentFrameScore[1];
 					}else if(previousFrameScore[1]===10){
