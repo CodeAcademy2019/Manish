@@ -1,27 +1,38 @@
-// const frameScore = 0;
-// const score = ()=>{
-// 	return result;
-// };
-
-// const roll = ((pins)=>{
-// 	return pins;
-// });
-
 const calculateGameScore = (...scores)=>{
 	const frameScores = formatInputToFrameScores(scores);
 	const result = frameScores.reduce((accumulator,presentValue)=>{
-		return accumulator+presentValue;
+		return accumulator+presentValue[1];
 	},0);
 	return result;
 };
 
 const formatInputToFrameScores = ((scores)=>{
 	const frameScores = scores.reduce((accumulator,presentValue,presentIndex)=>{
-		if(presentIndex%2===0){
+		if(presentValue===10){
+			accumulator.push([10,10]);
+		}else if(presentIndex===0){
 			accumulator.push(presentValue);
-		}else{
-			const firstRoll = accumulator.pop();
-			accumulator.push(presentValue+firstRoll);
+		}
+		else{
+			const previousValue = accumulator.pop();
+			if(typeof(previousValue)==='number'){
+				let frameScore = previousValue+presentValue;
+				let presentFrameScore = [previousValue,frameScore];
+				let previousFrameScore = accumulator.pop();
+				if(previousFrameScore!==undefined){
+					if(previousFrameScore[0]===10){
+						previousFrameScore[1]+=presentFrameScore[1];
+					}else if(previousFrameScore[1]===10){
+						previousFrameScore[1]+=presentFrameScore[0];
+					}
+					accumulator.push(previousFrameScore,presentFrameScore);
+				}
+				else{
+					accumulator.push(presentFrameScore);
+				}
+			}else{
+				accumulator.push(previousValue,presentValue);
+			}
 		}
 		return accumulator;
 	},[]);
@@ -30,4 +41,4 @@ const formatInputToFrameScores = ((scores)=>{
 
 module.exports = calculateGameScore;
 
-// calculateGameScore(3,6,3,6,3,6,3,6,3,6,3,6,3,6,3,6,3,6,3,6);
+// formatInputToFrameScores(3,6,3,6,3,6,3,6,3,6,3,6,3,6,3,6,3,6,3,6);
