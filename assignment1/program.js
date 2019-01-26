@@ -1,4 +1,4 @@
-const calculateGameScore = (...scores)=>{
+const calculateGameScore = (scores)=>{
 	const frameScores = formatInputToFrameScores(scores);
 	const result = frameScores.reduce((accumulator,presentValue)=>{
 		return accumulator+presentValue[1];
@@ -20,7 +20,7 @@ const formatInputToFrameScores = ((scores)=>{
 		}
 		else{
 			let score = 0;
-			if(accumulator.length%2==0 && preValue+arr[preValue-1]==10){
+			if(accumulator.length%2==1 && preValue+arr[preIndex-1]==10){
 				if(arr[preIndex+1]!==undefined){
 					score = preValue+arr[preIndex+1];
 				}

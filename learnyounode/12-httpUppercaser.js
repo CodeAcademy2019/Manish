@@ -1,14 +1,17 @@
 const http = require('http');
-const map = require('through2-map');
 
 const server = http.createServer((req,res)=>{
 	if(req.method === 'POST'){
 		res.statusCode = 200;
+		let data = '';
 		res.setHeader('Content-Type', 'text/plain');
-		req.pipe(map((chunk)=>{
-			return chunk.toString().toUpperCase();
-		})).pipe(res);
+		req.on('data',(chunk)=>{
+			data += chunk.toString().toUpperCase();
+		});
+		req.on('end',()=>{
+			res.end(data);
+		});
 	}
 });
 
-server.listen(process.argv[2]);
+server.listen(8080);

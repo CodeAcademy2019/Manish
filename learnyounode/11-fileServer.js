@@ -4,8 +4,7 @@ const fs = require('fs');
 const server = http.createServer((req,res)=>{
 	res.statusCode = 200;
 	res.setHeader('Content-Type', 'text/plain');
-	const file = fs.createReadStream(process.argv[3]);
+	const file = fs.createReadStream('./input/input_3.txt');
 	file.pipe(res);
 });
-
-server.listen(process.argv[2]);
+server.listen(8080);
