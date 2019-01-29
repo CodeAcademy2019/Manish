@@ -1,4 +1,4 @@
-const score = require('./program');
+const score = require('./test');
 
 // describe('Bowling Score',()=>{
 // 	it('Without spare and strikes',()=>{

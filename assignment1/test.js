@@ -3,7 +3,7 @@ const handleTenthFrame = (result, secondThrow,ThirdThrow)=>{
 	result = (ThirdThrow!==undefined) ? result-ThirdThrow : result;
 	return result;
 };
-
+let tenthframeScore = [];
 const throwScoresToFrameScores = (accumulator,presentValue,presentIndex)=>{
 	if(presentIndex%2===0){
 		accumulator.push(presentValue);
@@ -26,9 +26,10 @@ const inputToThrowScores = (accumulator,presentValue,presentIndex,scores)=>{
 	if(presentScore>10){
 		presentScore = NaN;
 	}else if(accumulator.length===18){
-		// do nothing
+		tenthframeScore.push(presentScore);
 	}else if(accumulator.length>18){
 		presentScore+=accumulator.pop();
+		tenthframeScore.push(presentScore);
 	}else if(accumulator.length%2===0 && presentValue===10){
 		presentScore+=spareOrStrike([scores[presentIndex+1],scores[presentIndex+2]]);
 		accumulator.push(0);
@@ -52,6 +53,12 @@ const calculateGameScore = (scores)=>{
 	if(isNaN(result)){
 		throw new Error('Score cannot be taken until the end of the game');
 	}
+	// if(!tenthframeScore[1]){
+	// 	throw new Error('Score cannot be taken until the end of the game');
+	// }
+	// if(tenthframeScore[1]>=10 && !tenthframeScore[2]){
+	// 	throw new Error('Score cannot be taken until the end of the game');
+	// }
 	return handleTenthFrame(result,frameScores[10],frameScores[11]);
 };
 
@@ -60,5 +67,7 @@ const formatInputToFrameScores = (scores)=>{
 	const frameScores = intermediateScore.reduce(throwScoresToFrameScores,[]);
 	return frameScores;
 };
+
+calculateGameScore([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10]);
 
 module.exports = calculateGameScore;
