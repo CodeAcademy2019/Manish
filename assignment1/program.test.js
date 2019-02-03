@@ -1,37 +1,37 @@
-const score = require('./test');
+const score = require('./test1');
 
-// describe('Bowling Score',()=>{
-// 	it('Without spare and strikes',()=>{
-// 		expect(calculateGameScore(3,6,3,6,3,6,3,6,3,6,3,6,3,6,3,6,3,6,3,6)).toEqual(90);
-// 	});
-// 	it('with a spare',()=>{
-// 		expect(calculateGameScore(6, 4, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)).toEqual(16);
-// 	});
-// 	it('with a strike',()=>{
-// 		expect(calculateGameScore(10,3,2,4,5)).toEqual('Invalid Input');
-// 	});
-// 	it('with a strike and spare',()=>{
-// 		expect(calculateGameScore(10,5,5,9,0)).toEqual('Invalid Input');
-// 	});
-// 	it('with all 10 score',()=>{
-// 		expect(calculateGameScore(10,10,10,10,10,10,10,10,10,10,10,10)).toEqual(300);
-// 	});
-// 	it('with a special 10th Frame',()=>{
-// 		expect(calculateGameScore(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10)).toEqual(30);
-// 	});
-// 	it('should return the total final score of the bowling', () => {
-// 		expect(calculateGameScore(6, 4, 3, 0, 10, 10, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)).toEqual(69);
-// 	});
-// 	it('should return 0 for no input', () => {
-// 		expect(calculateGameScore()).toEqual('Invalid Input');
-// 	});
-// 	it('should return Invalid Input for 9 frames and 1 throw in 10th', () => {
-// 		expect(calculateGameScore(10,10,10,10,10,10,10,10,3,8,2,7)).toEqual('Invalid Input');
-// 	});
-// 	it('should return not consider it as a strike if 10 pins are down in second throw', () => {
-// 		expect(calculateGameScore(0, 0, 0, 0, 0, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)).toEqual(30);
-// 	});
-// });
+describe('Bowling Score',()=>{
+	it('Without spare and strikes',()=>{
+		expect(score([3,6,3,6,3,6,3,6,3,6,3,6,3,6,3,6,3,6,3,6])).toEqual(90);
+	});
+	it('with a spare',()=>{
+		expect(score([6, 4, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])).toEqual(16);
+	});
+	xit('with a strike',()=>{
+		expect(score([10,3,2,4,5])).toEqual('Invalid Input');
+	});
+	xit('with a strike and spare',()=>{
+		expect(score([10,5,5,9,0])).toEqual('Invalid Input');
+	});
+	it('with all 10 score',()=>{
+		expect(score([10,10,10,10,10,10,10,10,10,10,10,10])).toEqual(300);
+	});
+	it('with a special 10th Frame',()=>{
+		expect(score([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10])).toEqual(30);
+	});
+	it('should return the total final score of the bowling', () => {
+		expect(score([6, 4, 3, 0, 10, 10, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])).toEqual(69);
+	});
+	xit('should return 0 for no input', () => {
+		expect(score()).toEqual('Invalid Input');
+	});
+	xit('should return Invalid Input for 9 frames and 1 throw in 10th', () => {
+		expect(score([10,10,10,10,10,10,10,10,3,8,2,7])).toEqual('Invalid Input');
+	});
+	it('should return not consider it as a strike if 10 pins are down in second throw', () => {
+		expect(score([0, 0, 0, 0, 0, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])).toEqual(30);
+	});
+});
 
 describe('Bowling', function () {
 	describe('Check game can be scored correctly.', function () {

@@ -3,7 +3,7 @@ const handleTenthFrame = (result, secondThrow,ThirdThrow)=>{
 	result = (ThirdThrow!==undefined) ? result-ThirdThrow : result;
 	return result;
 };
-let tenthframeScore = [];
+let tenthframeScore;
 const throwScoresToFrameScores = (accumulator,presentValue,presentIndex)=>{
 	if(presentIndex%2===0){
 		accumulator.push(presentValue);
@@ -43,6 +43,7 @@ const inputToThrowScores = (accumulator,presentValue,presentIndex,scores)=>{
 };
 
 const calculateGameScore = (scores)=>{
+	tenthframeScore = [];
 	const frameScores = formatInputToFrameScores(scores);
 	if(frameScores.length<10){
 		throw new Error('Score cannot be taken until the end of the game');
@@ -53,12 +54,12 @@ const calculateGameScore = (scores)=>{
 	if(isNaN(result)){
 		throw new Error('Score cannot be taken until the end of the game');
 	}
-	// if(!tenthframeScore[1]){
-	// 	throw new Error('Score cannot be taken until the end of the game');
-	// }
-	// if(tenthframeScore[1]>=10 && !tenthframeScore[2]){
-	// 	throw new Error('Score cannot be taken until the end of the game');
-	// }
+	if(tenthframeScore[0]>=10 && !tenthframeScore[1]){
+		throw new Error('Score cannot be taken until the end of the game');
+	}
+	if(tenthframeScore[1]>=10 && !tenthframeScore[2]){
+		throw new Error('Score cannot be taken until the end of the game');
+	}
 	return handleTenthFrame(result,frameScores[10],frameScores[11]);
 };
 
@@ -68,6 +69,6 @@ const formatInputToFrameScores = (scores)=>{
 	return frameScores;
 };
 
-calculateGameScore([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10]);
+// calculateGameScore([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10]);
 
 module.exports = calculateGameScore;
